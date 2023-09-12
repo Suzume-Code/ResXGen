@@ -22,6 +22,7 @@ input.resxを作成します。
 STRING    mystring1  "あういえおでん"   # 文字列例  
 BITMAP    mybitmap1  "/imgs/pic1.bmp"  # ビットマップ例  
   
+```
 ----+----1----+----2----+----3----+----4  
 STRING  resid  "文字列"  String型  
 TEXT    resid  "パス"    String型  
@@ -36,7 +37,7 @@ ICON    myicon10    "fold/1.ico"
 BITMAP  MYBMP1      "fold/model_71.png"  
 TEXT    sampletext  "fold/sample.txt"  
 EXCEL   excel       "fold/a.xlsx"  
-  
+```
 
 # Author
 
