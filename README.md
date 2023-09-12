@@ -1,9 +1,22 @@
 # ResXGen
-Use for Easy. C#.
 
-<使い方>
+Use for Easy. C#.
+.NetFrameworkの"resgen.exe"の代替アプリ。
+
+# Features
+
+# Requirement
+
+# Installation
+
+# Usage
+
+ResXGen.exe リソース定義.rc
+
 ResXGen.exe input.rc
 input.resxを作成します。
+
+# Note
 
 <書式例>
 STRING    mystring1  "あういえおでん"   # 文字列例
@@ -23,3 +36,11 @@ ICON    myicon10    "fold/1.ico"
 BITMAP  MYBMP1      "fold/model_71.png"
 TEXT    sampletext  "fold/sample.txt"
 EXCEL   excel       "fold/a.xlsx"
+
+
+# Author
+
+# License
+
+
+Thank you!
