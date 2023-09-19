@@ -130,7 +130,7 @@ namespace ResxGener {
 			string filename = Path.GetFileNameWithoutExtension(this._filePath) + ".resx";
 			_outputFilePath = Path.Combine(directotyName, filename);
 
-			PreValidation();
+			PreValidation(directotyName);
 			if (res_list.Count == 0) {
 				Console.WriteLine("No resouces.");
 				return;
@@ -141,7 +141,8 @@ namespace ResxGener {
 		/// <summary>
 		/// 事前検証
 		/// </summary>
-		private void PreValidation() {
+		/// <param name="directotyName"></param>
+		private void PreValidation(string directotyName) {
 
 			string[] lines = File.ReadAllLines(this._filePath, Encoding.GetEncoding("utf-8"));
 
@@ -150,7 +151,7 @@ namespace ResxGener {
 				Console.WriteLine(line);
 				if (line.Length == 0 || line[0] == '#' || line[0] == ';' || line[0] == ' ')
 					continue;
-				ResType token = LexicalAnalysis(line);
+				ResType token = LexicalAnalysis(line, directotyName);
 				if (token.Type.Equals(string.Empty)) {
 					Console.WriteLine("error");
 					continue;
@@ -163,8 +164,9 @@ namespace ResxGener {
 		/// 字句解析
 		/// </summary>
 		/// <param name="line"></param>
+		/// <param name="directotyName"></param>
 		/// <returns>登録リソースのタイプ、ID、値を返却</returns>
-		public ResType LexicalAnalysis(string line) {
+		public ResType LexicalAnalysis(string line, string directotyName) {
 			
 			string pattern = @"([A-Za-z][A-Za-z0-9]{0,})[ \t]{1,}([A-Za-z][A-Za-z0-9]{1,})[ \t]{1,}""([^""]*)""";
 
@@ -181,6 +183,8 @@ namespace ResxGener {
 			}
 
 			if (!restype.Type.Equals("STRING")) {
+				if (!Path.IsPathRooted(restype.Value))
+					restype.Value = Path.Combine(directotyName, restype.Value);
 				string fullpath = Path.GetFullPath(restype.Value);
 				if (!File.Exists(fullpath)) {
 					Console.WriteLine("error");
