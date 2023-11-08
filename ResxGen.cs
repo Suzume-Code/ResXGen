@@ -168,7 +168,7 @@ namespace ResxGener {
 		/// <returns>登録リソースのタイプ、ID、値を返却</returns>
 		public ResType LexicalAnalysis(string line, string directotyName) {
 			
-			string pattern = @"([A-Za-z][A-Za-z0-9]{0,})[ \t]{1,}([A-Za-z][A-Za-z0-9]{1,})[ \t]{1,}""([^""]*)""";
+			string pattern = @"([A-Za-z][A-Za-z0-9]{0,})[ \t]{1,}([A-Za-z][A-Za-z0-9_-]{1,})[ \t]{1,}""([^""]*)""";
 
 			ResType restype = new ResType();
 			restype.Type = string.Empty;
@@ -183,6 +183,7 @@ namespace ResxGener {
 			}
 
 			if (!restype.Type.Equals("STRING")) {
+				// 相対パスの場合は、絶対パスへ変換する
 				if (!Path.IsPathRooted(restype.Value))
 					restype.Value = Path.Combine(directotyName, restype.Value);
 				string fullpath = Path.GetFullPath(restype.Value);
